@@ -13,22 +13,28 @@ css filters off
 Layout
 
 *main
-contains:res, buttons
+contains:res, intro, early, mid, late, war, store
 
 *res
 contains:Resources
 
-*buttons
-contains:Buttons
+*intro
+contains:introButtons
+
+*early
+contains:earlyButtons
+
+*mid
+contains:midButtons
+
+*late
+contains:lateButtons
+
+*war
+contains:warButtons
 
 *store
 contains:buildings, upgrades
-
-*buildings
-contains:Buildings
-
-*upgrades
-contains:Upgrades
 
 Resources
 
@@ -98,6 +104,21 @@ name:War Progress
 hidden
 
 Buttons
+
+*introButtons
+contains:beginGame, introLook, introThink, introMove
+
+*earlyButtons
+contains:explore, gatherSticks, gatherStone, searchFood, rest, discoverFire
+
+*midButtons
+contains:craftAxe, meetNPC, assignWorker, work, forage, gatherMaterials, craftTools, study, bigDecision
+
+*lateButtons
+contains:pathTribe, pathRuler, pathSolo, pathWar, pathEnd
+
+*warButtons
+contains:exploreTribes, findTribe, tribeWar, unlockWW3, recruitSoldiers, produceWeapons, launchAttack
 
 *beginGame
 name:Wake Up
