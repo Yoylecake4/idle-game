@@ -155,7 +155,7 @@ on click:yield 1 workers
 on click:lose 1 people
 req:people>0
 
-*autoWork
+*work
 name:Work
 on click:yield 1 materials
 req:workers>0
