@@ -1,7 +1,7 @@
 Let's make a game!
 	name:Infinite Expedition
 	author:You
-	desc:A long journey from nothing to a civilization.
+	desc:A long journey from nothing to civilization.
 
 Settings
 	background:#0f172a
@@ -33,57 +33,61 @@ Layout
 
 Buttons
 
-	// === STORY PHASE ===
-	*startJourney
+	// ===== STORY PHASE =====
+	*start
 		name:Wake Up
+		req:stage=0
 		on click:
 			log You wake up alone in a strange land.
-			yield 1 stage
+			stage is 1
 		end
 
-	*lookAround
+	*look
 		name:Look Around
-		req:1 stage
+		req:stage=1
 		on click:
 			log You see trees, rocks, and open land.
-			yield 1 stage
+			stage is 2
 		end
 
-	*gatherSticks
+	*sticks
 		name:Gather Sticks
-		req:2 stage
+		req:stage=2
 		on click:
 			yield 1 sticks
-			log You gather some sticks.
+			log You gather sticks.
+			if (sticks >= 5)
+				stage is 3
+			end
 		end
 
-	*makeCamp
+	*camp
 		name:Build Camp
-		req:5 sticks
+		req:stage=3
 		on click:
-			log You build a small camp. Your journey begins.
-			yield 1 unlockGame
+			log You build a camp. A new life begins.
+			unlockGame is 1
 		end
 
-	// === MAIN GAME (LOCKED UNTIL CAMP) ===
+	// ===== MAIN GAME =====
 	*work
 		name:Work
-		req:1 unlockGame
+		req:unlockGame=1
 		on click:yield 1 energy
 
 	*forage
 		name:Forage
-		req:1 unlockGame
+		req:unlockGame=1
 		on click:yield 1 food
 
 	*gather
 		name:Gather Materials
-		req:1 unlockGame
+		req:unlockGame=1
 		on click:yield 1 materials
 
-	*craftTools
+	*craft
 		name:Craft Tool
-		req:2 materials
+		req:unlockGame=1 and materials>=2
 		on click:
 			yield -2 materials
 			yield 1 tools
@@ -105,7 +109,7 @@ Resources
 		name:Tools
 		hidden when 0
 
-	// MAIN RESOURCES
+	// MAIN
 	*energy
 		name:Energy
 		hidden when 0
@@ -121,27 +125,22 @@ Resources
 Buildings
 	*workers
 		name:Workers
-		req:1 unlockGame
+		req:unlockGame=1
 		cost:10 energy
 		on tick:yield 1 energy
 
 	*farms
 		name:Farms
-		req:1 unlockGame
+		req:unlockGame=1
 		cost:20 materials
 		on tick:yield 1 food
 
 Upgrades
-	*efficiency
+	*eff
 		name:Efficiency
-		req:1 unlockGame
-		cost:50 tools
+		req:unlockGame=1
+		cost:20 tools
 		passive:multiply yield of energy by 2
-
-Achievements
-	*begin
-		name:A New Beginning
-		req:1 unlockGame
 
 CSS
 #game {
