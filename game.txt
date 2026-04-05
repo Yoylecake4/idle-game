@@ -1,7 +1,5 @@
 Let's make a game!
 
-
-
 name:Infinite Expedition
 by:You
 desc:Start alone. Discover your purpose.
@@ -15,13 +13,13 @@ css filters off
 Layout
 
 *main
-contains:res, buttons, store
+contains:introPanel, gamePanel, store
 
-*res
-contains:Resources
+*introPanel
+contains:IntroButtons
 
-*buttons
-contains:Buttons
+*gamePanel
+contains:Resources, Buttons
 
 *store
 contains:Buildings, Upgrades
@@ -89,207 +87,200 @@ name:Soldiers
 *warMaterials
 name:War Materials
 
-Buttons
+*warProgress
+name:War Progress
+hidden
+
+IntroButtons
 
 *introWake
 name:Wake Up
-on click:unlock introLook
+on click:introStep is 1
 on click:log Darkness fades... you wake up alone.
+req:introStep=0
 
 *introLook
 name:Look Around
-hidden
-on click:unlock introThink
+on click:introStep is 2
 on click:log Trees. Silence. You are completely alone.
+req:introStep=1
 
 *introThink
 name:Think
-hidden
-on click:unlock introMove
+on click:introStep is 3
 on click:log You need food... shelter... purpose.
+req:introStep=2
 
 *introMove
 name:Get Up
-hidden
+on click:introStep is 4
 on click:phase is 1
-on click:unlock explore
-on click:unlock gatherSticks
-on click:unlock gatherStone
-on click:unlock searchFood
-on click:unlock rest
 on click:log You begin your journey.
+req:introStep=3
+
+Buttons
 
 *explore
 name:Explore
-hidden
 on click:yield 1 exploration
-on click:unlock discoverFire
+on click:yield 1 warUnlock
+req:phase>=1
 
 *gatherSticks
 name:Gather Sticks
-hidden
 on click:yield 1 sticks
+req:phase>=1
 
 *gatherStone
 name:Gather Stone
-hidden
 on click:yield 1 stone
+req:phase>=1
 
 *searchFood
 name:Find Food
-hidden
 on click:yield 1 food
+req:phase>=1
 
 *rest
 name:Rest
-hidden
 on click:yield 2 energy
+req:phase>=1
 
 *discoverFire
 name:Discover Fire
-hidden
 on click:yield 1 knowledge
 on click:phase is 2
-on click:unlock craftAxe
-on click:unlock meetNPC
 on click:log Fire changes everything...
+req:phase=1 and sticks>10 and stone>5
 
 *craftAxe
 name:Craft Axe
-hidden
 on click:yield 1 axe
 on click:lose 5 sticks
 on click:lose 3 stone
+req:phase>=2
 
 *meetNPC
 name:Find Survivor
-hidden
 on click:yield 1 people
-on click:unlock assignWorker
+req:phase>=2 and exploration>5
 
 *assignWorker
 name:Assign Worker
-hidden
 on click:yield 1 workers
 on click:lose 1 people
-on click:unlock work
-on click:unlock forage
-on click:unlock gatherMaterials
+req:people>0
 
 *work
 name:Work
-hidden
 on click:yield 1 energy
+req:workers>0
 
 *forage
 name:Forage
-hidden
 on click:yield 2 food
+req:workers>0
 
 *gatherMaterials
 name:Gather Materials
-hidden
 on click:yield 2 materials
-on click:unlock craftTools
+req:workers>0
 
 *craftTools
 name:Craft Tools
-hidden
 on click:yield 1 tools
 on click:lose 5 materials
-on click:unlock study
+req:materials>5
 
 *study
 name:Study
-hidden
 on click:yield 1 knowledge
-on click:unlock bigDecision
+req:tools>3
 
 *bigDecision
 name:Choose Your Future
-hidden
-on click:unlock pathTribe
-on click:unlock pathRuler
-on click:unlock pathSolo
-on click:unlock pathWar
-on click:unlock pathEnd
+on click:phase is 3
+on click:log You are no longer just surviving...
+req:knowledge>10 and materials>20
 
 *pathTribe
 name:Build a Tribe
-hidden
 on click:path is 1
-on click:unlock exploreTribes
+on click:phase is 4
+on click:yield 5 people
 on click:log You form a tribe.
+req:phase=3
 
 *pathRuler
 name:Rule the World
-hidden
 on click:path is 2
+on click:phase is 4
 on click:log Power becomes your goal.
+req:phase=3
 
 *pathSolo
 name:Stay Alone
-hidden
 on click:path is 3
+on click:phase is 4
 on click:log You remain independent.
+req:phase=3
 
 *pathWar
 name:Start WW3
-hidden
 on click:path is 4
+on click:phase is 4
 on click:yield 10 soldiers
 on click:yield 20 warMaterials
-on click:unlock recruitSoldiers
-on click:unlock produceWeapons
-on click:unlock launchAttack
+on click:log War begins...
+req:phase=3
 
 *pathEnd
 name:End the World
-hidden
 on click:path is 5
+on click:phase is 4
 on click:log You choose destruction...
+req:phase=3
 
 *exploreTribes
 name:Explore for Tribes
-hidden
 on click:yield 1 tribePower
-on click:unlock findTribe
+req:path=1
 
 *findTribe
 name:Encounter Tribe
-hidden
 on click:yield 5 tribePower
-on click:unlock tribeWar
+on click:log You find another tribe.
+req:path=1 and tribePower>10
 
 *tribeWar
 name:Tribe War
-hidden
 on click:yield 2 warUnlock
-on click:unlock unlockWW3
+on click:log Tribal war begins.
+req:path=1 and tribePower>20
 
 *unlockWW3
 name:Escalate to World War
-hidden
 on click:path is 4
-on click:unlock recruitSoldiers
-on click:unlock produceWeapons
+on click:log Conflict spreads worldwide.
+req:path=1 and warUnlock>200
 
 *recruitSoldiers
 name:Recruit Soldiers
-hidden
 on click:yield 5 soldiers
 on click:lose 2 people
+req:path=4 and people>2
 
 *produceWeapons
 name:Produce Weapons
-hidden
 on click:yield 5 warMaterials
 on click:lose 5 materials
+req:path=4 and materials>5
 
 *launchAttack
 name:Launch Attack
-hidden
-on click:log War spreads across the world...
+on click:yield 1 warProgress
+on click:log You attack enemy forces.
+req:path=4 and soldiers>10 and warMaterials>10
 
 Buildings
 
