@@ -1,164 +1,170 @@
 Let's make a game!
 
 *game
-title:Infinite Expedition: Civilization Ascent
-author:You
+name:Infinite Expedition
+by:You
 desc:Start alone. Discover your purpose.
 
-*resources
+Resources
 
-energy
-name:Energy
+```
+*energy
+	name:Energy
 
-food
-name:Food
+*food
+	name:Food
 
-materials
-name:Materials
+*materials
+	name:Materials
 
-knowledge
-name:Knowledge
+*knowledge
+	name:Knowledge
 
-exploration
-name:Exploration
+*exploration
+	name:Exploration
 
-people
-name:Colonists
+*people
+	name:Colonists
 
-tools
-name:Tools
+*tools
+	name:Tools
 
-sticks
-name:Sticks
+*sticks
+	name:Sticks
 
-stone
-name:Stone
+*stone
+	name:Stone
+```
 
-*log
-You wake up in a strange land.
-You have nothing.
+Buttons
 
-*buttons
-
+```
 *exploreStart
-name:Explore
-desc:Look around.
-on click:yield 1 exploration
-on click:log You search the area...
+	name:Explore
+	desc:Look around.
+	on click:yield 1 exploration
+	on click:log You search the area...
 
 *searchFood
-name:Search for Food
-on click:yield 1 food
-req:exploration>2
+	name:Search for Food
+	on click:yield 1 food
+	req:exploration>2
 
 *gatherSticks
-name:Gather Sticks
-on click:yield 1 sticks
-req:exploration>1
+	name:Gather Sticks
+	on click:yield 1 sticks
+	req:exploration>1
 
 *gatherStone
-name:Gather Stone
-on click:yield 1 stone
-req:exploration>2
+	name:Gather Stone
+	on click:yield 1 stone
+	req:exploration>2
 
 *rest
-name:Rest
-on click:yield 2 energy
+	name:Rest
+	on click:yield 2 energy
 
 *discoverFire
-name:Discover Fire
-on click:yield 1 knowledge
-req:sticks>10 and stone>5
+	name:Discover Fire
+	on click:yield 1 knowledge
+	req:sticks>10 and stone>5
 
 *unlockCivilization
-name:Settle Land
-on click:yield 1 people
-on click:log You begin building something bigger...
-req:knowledge>5
+	name:Settle Land
+	on click:yield 1 people
+	on click:log You begin building something bigger...
+	req:knowledge>5
 
 *work
-name:Work
-on click:yield 1 energy
-req:people>0
+	name:Work
+	on click:yield 1 energy
+	req:people>0
 
 *forage
-name:Forage
-on click:yield 1 food
-req:energy>5 and people>0
+	name:Forage
+	on click:yield 1 food
+	req:energy>5 and people>0
 
 *gatherMaterials
-name:Gather Materials
-on click:yield 1 materials
-req:energy>10 and people>0
+	name:Gather Materials
+	on click:yield 1 materials
+	req:energy>10 and people>0
 
 *craftTools
-name:Craft Tools
-on click:yield 1 tools
-req:materials>10
+	name:Craft Tools
+	on click:yield 1 tools
+	req:materials>10
 
 *study
-name:Study
-on click:yield 1 knowledge
-req:tools>5
+	name:Study
+	on click:yield 1 knowledge
+	req:tools>5
 
-*explore
-name:Explore World
-on click:yield 1 exploration
-req:knowledge>10
+*exploreWorld
+	name:Explore World
+	on click:yield 1 exploration
+	req:knowledge>10
+```
 
-*buildings
+Buildings
 
-camp
-name:Camp
-cost:10 sticks
-on tick:yield 1 energy
+```
+*camp
+	name:Camp
+	cost:10 sticks
+	on tick:yield 1 energy
 
-farm
-name:Farms
-cost:20 materials
-on tick:yield 1 food
+*farm
+	name:Farms
+	cost:20 materials
+	on tick:yield 1 food
 
-workshop
-name:Workshop
-cost:30 materials
-on tick:yield 1 tools
+*workshop
+	name:Workshop
+	cost:30 materials
+	on tick:yield 1 tools
 
-school
-name:School
-cost:50 materials
-on tick:yield 1 knowledge
+*school
+	name:School
+	cost:50 materials
+	on tick:yield 1 knowledge
+```
 
-*upgrades
+Upgrades
 
-fireMaking
-name:Fire Mastery
-cost:10 sticks
-effect:yield energy x2
+```
+*fireMaking
+	name:Fire Mastery
+	cost:10 sticks
+	passive:multiply yield of energy by 2
 
-toolMaking
-name:Better Tools
-cost:20 tools
-effect:yield materials x2
+*toolMaking
+	name:Better Tools
+	cost:20 tools
+	passive:multiply yield of materials by 2
 
-education
-name:Education
-cost:50 knowledge
-effect:yield knowledge x2
+*education
+	name:Education
+	cost:50 knowledge
+	passive:multiply yield of knowledge by 2
+```
 
-*achievements
+Achievements
 
-start
-name:First Step
-req:exploration>1
+```
+*start
+	name:First Step
+	req:exploration>1
 
-food10
-name:Survivor
-req:food>10
+*food10
+	name:Survivor
+	req:food>10
 
-tools10
-name:Crafter
-req:tools>10
+*tools10
+	name:Crafter
+	req:tools>10
 
-knowledge10
-name:Thinker
-req:knowledge>10
+*knowledge10
+	name:Thinker
+	req:knowledge>10
+```
