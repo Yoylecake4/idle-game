@@ -42,48 +42,61 @@ hidden
 *warProgress
 hidden
 
-*systems
+*introSystem
 on tick:
-if (intro=1)
-    if (introTick=1)
-        log Darkness...
-        yield 1 introTick
-    else if (introTick=2)
-        log You wake up.
-        yield 1 introTick
-    else if (introTick=3)
-        log Alone.
-        yield 1 introTick
-    else if (introTick=4)
-        log No memory.
-        yield 1 introTick
-    else if (introTick=5)
-        log Just instinct.
-        yield 1 introTick
-    else if (introTick=6)
-        log Survive.
-        yield 1 introTick
-    else if (introTick=7)
-        log Explore.
-        yield 1 introTick
-    else if (introTick=8)
-        log Adapt.
-        yield 1 introTick
-    else if (introTick=9)
-        log Become something more.
-        yield 1 introTick
-    else if (introTick=10)
-        phase is 1
-        intro is 2
-    end
-else if (warProgress>20)
-    if (soldiers<50)
-        log You lost the war.
-    else if (soldiers>100 and warMaterials>100)
-        log The world ends in nuclear fire.
-    else
-        log The war continues endlessly.
-    end
+if (intro=1 and introTick=1)
+    log Darkness...
+    yield 1 introTick
+end
+if (intro=1 and introTick=2)
+    log You wake up.
+    yield 1 introTick
+end
+if (intro=1 and introTick=3)
+    log Alone.
+    yield 1 introTick
+end
+if (intro=1 and introTick=4)
+    log No memory.
+    yield 1 introTick
+end
+if (intro=1 and introTick=5)
+    log Just instinct.
+    yield 1 introTick
+end
+if (intro=1 and introTick=6)
+    log Survive.
+    yield 1 introTick
+end
+if (intro=1 and introTick=7)
+    log Explore.
+    yield 1 introTick
+end
+if (intro=1 and introTick=8)
+    log Adapt.
+    yield 1 introTick
+end
+if (intro=1 and introTick=9)
+    log Become something more.
+    yield 1 introTick
+end
+if (intro=1 and introTick=10)
+    phase is 1
+    intro is 2
+end
+
+*warSystem
+on tick:
+if (warProgress>20 and soldiers<50)
+    log You lost the war.
+    warProgress is 0
+end
+if (warProgress>20 and soldiers>100 and warMaterials>100)
+    log The world ends in nuclear fire.
+    warProgress is 0
+end
+if (warProgress>20 and soldiers>=50 and soldiers<=100)
+    log The war continues endlessly.
     warProgress is 0
 end
 
