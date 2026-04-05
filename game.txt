@@ -1,181 +1,164 @@
 Let's make a game!
-	name:Infinite Expedition
-	author:You
-	desc:A long journey from nothing to civilization.
 
-Settings
-	background:#0f172a
+*game
+title:Infinite Expedition: Civilization Ascent
+author:You
+desc:Start alone. Discover your purpose.
 
-Layout
-	*main
-		contains:leftPanel, rightPanel
+*resources
 
-	*leftPanel
-		contains:res, buttons, log
-		class:left
+energy
+name:Energy
 
-	*rightPanel
-		contains:store
-		class:right
+food
+name:Food
 
-	*res
-		contains:Resources
+materials
+name:Materials
 
-	*buttons
-		contains:Buttons
-		class:buttons
+knowledge
+name:Knowledge
 
-	*store
-		contains:Buildings, Upgrades
+exploration
+name:Exploration
 
-	*log
-		contains:Log
+people
+name:Colonists
 
-Buttons
+tools
+name:Tools
 
-	// ===== STORY PHASE =====
-	*start
-		name:Wake Up
-		req:stage=0
-		on click:
-			log You wake up alone in a strange land.
-			stage is 1
-		end
+sticks
+name:Sticks
 
-	*look
-		name:Look Around
-		req:stage=1
-		on click:
-			log You see trees, rocks, and open land.
-			stage is 2
-		end
+stone
+name:Stone
 
-	*sticks
-		name:Gather Sticks
-		req:stage=2
-		on click:
-			yield 1 sticks
-			log You gather sticks.
-			if (sticks >= 5)
-				stage is 3
-			end
-		end
+*log
+You wake up in a strange land.
+You have nothing.
 
-	*camp
-		name:Build Camp
-		req:stage=3
-		on click:
-			log You build a camp. A new life begins.
-			unlockGame is 1
-		end
+*buttons
 
-	// ===== MAIN GAME =====
-	*work
-		name:Work
-		req:unlockGame=1
-		on click:yield 1 energy
+*exploreStart
+name:Explore
+desc:Look around.
+on click:yield 1 exploration
+on click:log You search the area...
 
-	*forage
-		name:Forage
-		req:unlockGame=1
-		on click:yield 1 food
+*searchFood
+name:Search for Food
+on click:yield 1 food
+req:exploration>2
 
-	*gather
-		name:Gather Materials
-		req:unlockGame=1
-		on click:yield 1 materials
+*gatherSticks
+name:Gather Sticks
+on click:yield 1 sticks
+req:exploration>1
 
-	*craft
-		name:Craft Tool
-		req:unlockGame=1 and materials>=2
-		on click:
-			yield -2 materials
-			yield 1 tools
-		end
+*gatherStone
+name:Gather Stone
+on click:yield 1 stone
+req:exploration>2
 
-Resources
-	*stage
-		hidden
+*rest
+name:Rest
+on click:yield 2 energy
 
-	*unlockGame
-		hidden
+*discoverFire
+name:Discover Fire
+on click:yield 1 knowledge
+req:sticks>10 and stone>5
 
-	// INVENTORY
-	*sticks
-		name:Sticks
-		hidden when 0
+*unlockCivilization
+name:Settle Land
+on click:yield 1 people
+on click:log You begin building something bigger...
+req:knowledge>5
 
-	*tools
-		name:Tools
-		hidden when 0
+*work
+name:Work
+on click:yield 1 energy
+req:people>0
 
-	// MAIN
-	*energy
-		name:Energy
-		hidden when 0
+*forage
+name:Forage
+on click:yield 1 food
+req:energy>5 and people>0
 
-	*food
-		name:Food
-		hidden when 0
+*gatherMaterials
+name:Gather Materials
+on click:yield 1 materials
+req:energy>10 and people>0
 
-	*materials
-		name:Materials
-		hidden when 0
+*craftTools
+name:Craft Tools
+on click:yield 1 tools
+req:materials>10
 
-Buildings
-	*workers
-		name:Workers
-		req:unlockGame=1
-		cost:10 energy
-		on tick:yield 1 energy
+*study
+name:Study
+on click:yield 1 knowledge
+req:tools>5
 
-	*farms
-		name:Farms
-		req:unlockGame=1
-		cost:20 materials
-		on tick:yield 1 food
+*explore
+name:Explore World
+on click:yield 1 exploration
+req:knowledge>10
 
-Upgrades
-	*eff
-		name:Efficiency
-		req:unlockGame=1
-		cost:20 tools
-		passive:multiply yield of energy by 2
+*buildings
 
-CSS
-#game {
-	background:#0f172a;
-	color:#e5e7eb;
-	font-family:Arial, sans-serif;
-}
+camp
+name:Camp
+cost:10 sticks
+on tick:yield 1 energy
 
-.left {
-	width:50%;
-	float:left;
-	padding:20px;
-}
+farm
+name:Farms
+cost:20 materials
+on tick:yield 1 food
 
-.right {
-	width:50%;
-	float:right;
-	padding:20px;
-}
+workshop
+name:Workshop
+cost:30 materials
+on tick:yield 1 tools
 
-.buttons button {
-	display:block;
-	width:100%;
-	margin-bottom:10px;
-}
+school
+name:School
+cost:50 materials
+on tick:yield 1 knowledge
 
-button {
-	background:#1f2937;
-	color:white;
-	border:none;
-	padding:12px;
-	border-radius:10px;
-	cursor:pointer;
-}
+*upgrades
 
-button:hover {
-	background:#374151;
-}
+fireMaking
+name:Fire Mastery
+cost:10 sticks
+effect:yield energy x2
+
+toolMaking
+name:Better Tools
+cost:20 tools
+effect:yield materials x2
+
+education
+name:Education
+cost:50 knowledge
+effect:yield knowledge x2
+
+*achievements
+
+start
+name:First Step
+req:exploration>1
+
+food10
+name:Survivor
+req:food>10
+
+tools10
+name:Crafter
+req:tools>10
+
+knowledge10
+name:Thinker
+req:knowledge>10
