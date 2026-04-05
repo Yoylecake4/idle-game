@@ -1,4 +1,4 @@
-*game
+Let's make a game!
 
 name:Infinite Expedition
 by:You
