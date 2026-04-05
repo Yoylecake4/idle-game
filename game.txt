@@ -52,6 +52,10 @@ hidden
 name:Intro
 hidden
 
+*introTick
+name:Intro Timer
+hidden
+
 *path
 name:Path
 hidden
@@ -97,33 +101,50 @@ hidden
 Buttons
 
 *start
-name:Wake Up
+name:Begin
 on click:intro is 1
-on click:log You wake up... alone.
+on click:introTick is 1
 req:intro=0
 
-*look
-name:Look Around
-on click:intro is 2
-on click:log Trees surround you. Silence.
-req:intro=1
-
-*think
-name:Think
-on click:intro is 3
-on click:log You need to survive.
-req:intro=2
-
-*begin
-name:Get Up
-on click:phase is 1
-on click:log You begin exploring.
-req:intro=3
+*introRunner
+passive:
+if (intro=1)
+if (introTick=1)
+log Darkness...
+yield 1 introTick
+else if (introTick=2)
+log You wake up.
+yield 1 introTick
+else if (introTick=3)
+log Alone.
+yield 1 introTick
+else if (introTick=4)
+log No memory.
+yield 1 introTick
+else if (introTick=5)
+log Just instinct.
+yield 1 introTick
+else if (introTick=6)
+log Survive.
+yield 1 introTick
+else if (introTick=7)
+log Explore.
+yield 1 introTick
+else if (introTick=8)
+log Adapt.
+yield 1 introTick
+else if (introTick=9)
+log Become something more.
+yield 1 introTick
+else if (introTick=10)
+phase is 1
+intro is 2
+end
+end
 
 *explore
 name:Explore
 on click:yield 1 exploration
-on click:log You search the area...
 req:phase=1
 
 *gatherSticks
@@ -140,13 +161,11 @@ req:exploration>10
 name:Discover Fire
 on click:yield 1 knowledge
 on click:phase is 2
-on click:log Fire changes everything.
 req:sticks>10 and stone>5
 
 *findPerson
 name:Find Survivor
 on click:yield 1 people
-on click:log You are no longer alone.
 req:phase=2 and exploration>15
 
 *assignWorker
@@ -174,7 +193,6 @@ req:tools>3
 *decide
 name:Choose Your Path
 on click:phase is 3
-on click:log You decide your future...
 req:knowledge>10
 
 *tribe
@@ -223,7 +241,6 @@ req:path=3
 *attack
 name:Launch Attack
 on click:yield 1 warProgress
-on click:log Battle rages...
 req:path=3 and soldiers>10
 
 *warResult
