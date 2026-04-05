@@ -4,16 +4,27 @@ Let's make a game!
 	desc:A massive civilization that takes years to complete.
 
 Settings
-	background:#0a0a0a
+	background:#0f172a
 	building cost increase:115%
 
 Layout
 	*main
+		contains:leftPanel, rightPanel
+
+	*leftPanel
 		contains:res, buttons
+		class:left
+
+	*rightPanel
+		contains:store
+		class:right
+
 	*res
 		contains:Resources
+
 	*buttons
 		contains:Buttons
+
 	*store
 		contains:Buildings, Upgrades
 
@@ -22,21 +33,26 @@ Buttons
 		name:Work
 		desc:Generate energy.
 		on click:yield 1 energy
+		class:bigButton
 
 	*forage
 		name:Forage
+		desc:Get food.
 		on click:yield 1 food
 		req:5 energy
+		class:bigButton
 
 	*gather
 		name:Gather Materials
 		on click:yield 1 materials
 		req:10 energy
+		class:bigButton
 
 	*recruit
 		name:Recruit Colonist
 		on click:yield 1 people
 		req:20 food
+		class:bigButton
 
 Resources
 	*energy
@@ -72,3 +88,44 @@ Achievements
 	*start
 		name:First Steps
 		req:1 energy
+
+CSS
+#game {
+	background:#0f172a;
+	color:#e5e7eb;
+	font-family:Arial, sans-serif;
+}
+
+.left {
+	width:50%;
+	float:left;
+	padding:20px;
+}
+
+.right {
+	width:50%;
+	float:right;
+	padding:20px;
+}
+
+button {
+	background:#1f2937;
+	color:white;
+	border:none;
+	padding:12px;
+	margin:6px;
+	border-radius:10px;
+	cursor:pointer;
+	font-size:14px;
+}
+
+button:hover {
+	background:#374151;
+}
+
+.store .building {
+	background:#111827;
+	padding:12px;
+	margin:6px;
+	border-radius:10px;
+}
