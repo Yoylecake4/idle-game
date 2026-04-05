@@ -1,44 +1,82 @@
 Let's make a game!
-*game
 name:Infinite Expedition
 by:You
-desc:Survive, discover, and build a civilization.
+desc:Start alone. Discover your purpose.
+
+Settings
+background:#0b1a2b
+no particles
+css filters off
+
+Layout
+
+*main
+	contains:res, buttons
+	
+	*res
+		contains:Resources
+		class:fullWidth
+	
+	*buttons
+		contains:Buttons
+
+*store
+	contains:buildings, upgrades
+	
+	*buildings
+		contains:Buildings
+	
+	*upgrades
+		contains:Upgrades
 
 Resources
+
 *energy
-name:Energy
+	name:Energy
+
 *food
-name:Food
+	name:Food
+
 *materials
-name:Materials
+	name:Materials
+
 *knowledge
-name:Knowledge
+	name:Knowledge
+
 *exploration
-name:Exploration
+	name:Exploration
+
 *people
-name:Colonists
+	name:Colonists
+
 *tools
-name:Tools
+	name:Tools
+
 *sticks
-name:Sticks
+	name:Sticks
+
 *stone
-name:Stone
+	name:Stone
+
 *axe
-name:Axe
-hidden
+	name:Axe
+	hidden
 
 Buttons
-*lookAround
-name:Look Around
-on click:yield 1 exploration
+
+*explore
+	name:Explore
+	desc:Look around your surroundings.
+	on click:yield 1 exploration
+	on click:log You explore the unknown...
 
 *gatherSticks
-	name:Pick up Sticks
+	name:Gather Sticks
 	on click:yield 1 sticks
 	req:exploration>1
 
 *gatherStone
-	name:Pick up Stones
+	name:Gather Stone
 	on click:yield 1 stone
 	req:exploration>2
 
@@ -52,8 +90,9 @@ on click:yield 1 exploration
 	on click:yield 2 energy
 
 *meetNPC
-	name:Investigate Noise
+	name:Find Survivor
 	on click:yield 1 people
+	on click:log A survivor joins you.
 	req:exploration>5
 
 *craftAxe
@@ -63,9 +102,10 @@ on click:yield 1 exploration
 	on click:lose 3 stone
 	req:sticks>5 and stone>3
 
-*unlockVillage
-	name:Settle Village
+*settle
+	name:Settle Land
 	on click:yield 1 people
+	on click:log You begin building a settlement.
 	req:people>1 and axe>0
 
 *work
@@ -94,10 +134,11 @@ on click:yield 1 exploration
 	req:tools>5
 
 Buildings
+
 *camp
-name:Camp
-cost:10 sticks
-on tick:yield 1 energy
+	name:Camp
+	cost:10 sticks
+	on tick:yield 1 energy
 
 *farm
 	name:Farms
@@ -115,10 +156,11 @@ on tick:yield 1 energy
 	on tick:yield 1 knowledge
 
 Upgrades
+
 *axeBoost
-name:Efficient Cutting
-cost:1 axe
-passive:multiply yield of sticks by 2
+	name:Efficient Cutting
+	cost:1 axe
+	passive:multiply yield of sticks by 2
 
 *toolBoost
 	name:Better Tools
@@ -131,18 +173,19 @@ passive:multiply yield of sticks by 2
 	passive:multiply yield of knowledge by 2
 
 Achievements
-*firstSteps
-name:Awakening
-req:exploration>1
 
-*firstNPC
+*start
+	name:First Step
+	req:exploration>1
+
+*survivor
 	name:Not Alone
 	req:people>1
 
-*craftAxeAch
-	name:Toolmaker
+*toolmaker
+	name:Crafted Tool
 	req:axe>0
 
-*settlement
+*builder
 	name:Settlement Begins
 	req:people>5
