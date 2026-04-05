@@ -1,3 +1,162 @@
 Let's make a game!
 *game
-	name:Test
+name:Infinite Expedition
+by:You
+desc:Survive, discover, and build a civilization.
+
+Resources
+*energy
+name:Energy
+
+*food
+	name:Food
+
+*materials
+	name:Materials
+
+*knowledge
+	name:Knowledge
+
+*exploration
+	name:Exploration
+
+*people
+	name:Colonists
+
+*tools
+	name:Tools
+
+*sticks
+	name:Sticks
+
+*stone
+	name:Stone
+
+*axe
+	name:Axe
+	hidden
+
+Buttons
+*lookAround
+name:Look Around
+desc:Observe your surroundings.
+on click:yield 1 exploration
+on click:log You are alone in a strange land...
+
+*gatherSticks
+	name:Pick up Sticks
+	on click:yield 1 sticks
+	req:exploration>1
+
+*gatherStone
+	name:Pick up Stones
+	on click:yield 1 stone
+	req:exploration>2
+
+*searchFood
+	name:Search for Food
+	on click:yield 1 food
+	req:exploration>3
+
+*rest
+	name:Rest
+	on click:yield 2 energy
+
+*meetNPC
+	name:Investigate Noise
+	on click:yield 1 people
+	on click:log You meet a survivor. They join you.
+	req:exploration>5
+
+*craftAxe
+	name:Craft Axe
+	on click:yield 1 axe
+	on click:lose 5 sticks
+	on click:lose 3 stone
+	on click:log You crafted an axe.
+	req:sticks>5 and stone>3
+
+*unlockVillage
+	name:Settle Village
+	on click:yield 1 people
+	on click:log You begin forming a settlement.
+	req:people>1 and axe>0
+
+*work
+	name:Work
+	on click:yield 1 energy
+	req:people>0
+
+*forage
+	name:Forage
+	on click:yield 1 food
+	req:energy>5 and people>0
+
+*gatherMaterials
+	name:Gather Materials
+	on click:yield 1 materials
+	req:energy>10 and people>0
+
+*craftTools
+	name:Craft Tools
+	on click:yield 1 tools
+	req:materials>10
+
+*study
+	name:Study
+	on click:yield 1 knowledge
+	req:tools>5
+
+Buildings
+*camp
+name:Camp
+cost:10 sticks
+on tick:yield 1 energy
+
+*farm
+	name:Farms
+	cost:20 materials
+	on tick:yield 1 food
+
+*workshop
+	name:Workshop
+	cost:30 materials
+	on tick:yield 1 tools
+
+*school
+	name:School
+	cost:50 materials
+	on tick:yield 1 knowledge
+
+Upgrades
+*axeBoost
+name:Efficient Cutting
+cost:1 axe
+passive:multiply yield of sticks by 2
+
+*toolBoost
+	name:Better Tools
+	cost:20 tools
+	passive:multiply yield of materials by 2
+
+*knowledgeBoost
+	name:Education
+	cost:50 knowledge
+	passive:multiply yield of knowledge by 2
+
+Achievements
+*firstSteps
+name:Awakening
+req:exploration>1
+
+*firstNPC
+	name:Not Alone
+	req:people>1
+
+*craftAxeAch
+	name:Toolmaker
+	req:axe>0
+
+*settlement
+	name:Settlement Begins
+	req:people>5
