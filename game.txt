@@ -8,45 +8,41 @@ Settings
 
 background:#0b1a2b
 no particles
-css filters on
+css filters off
 
 css:
-#buttons {
+#container {
+    display: flex;
+}
+
+#left {
+    width: 70%;
+}
+
+#right {
+    width: 30%;
+}
+
+#things {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    max-width: 900px;
 }
 
-#buttons button {
+.thing {
     min-width: 140px;
     padding: 6px;
-    font-size: 13px;
-}
-
-#res {
-    margin-bottom: 10px;
-}
-
-#store {
-    position: absolute;
-    right: 10px;
-    top: 60px;
-    width: 220px;
-}
-
-button {
     background: #1e2a3a;
     color: white;
     border: 1px solid #3a4a5a;
     cursor: pointer;
 }
 
-button:hover {
+.thing:hover {
     background: #2a3a4f;
 }
 
-button:disabled {
+.thing.disabled {
     opacity: 0.4;
 }
 
@@ -137,52 +133,52 @@ Buttons
 name:Wake Up
 on click:introStep is 1
 on click:log Darkness fades... you wake up alone.
-req:introStep=0
+req:phase=0 and introStep=0
 
 *introLook
 name:Look Around
 on click:introStep is 2
 on click:log Trees. Silence. You are completely alone.
-req:introStep=1
+req:phase=0 and introStep=1
 
 *introThink
 name:Think
 on click:introStep is 3
 on click:log You need food... shelter... purpose.
-req:introStep=2
+req:phase=0 and introStep=2
 
 *introMove
 name:Get Up
 on click:introStep is 4
 on click:phase is 1
 on click:log You begin your journey.
-req:introStep=3
+req:phase=0 and introStep=3
 
 *explore
 name:Explore
 on click:yield 1 exploration
 on click:yield 1 warUnlock
-req:phase>=1
+req:phase=1
 
 *gatherSticks
 name:Gather Sticks
 on click:yield 1 sticks
-req:phase>=1
+req:phase=1
 
 *gatherStone
 name:Gather Stone
 on click:yield 1 stone
-req:phase>=1
+req:phase=1
 
 *searchFood
 name:Find Food
 on click:yield 1 food
-req:phase>=1
+req:phase=1
 
 *rest
 name:Rest
 on click:yield 2 energy
-req:phase>=1
+req:phase=1
 
 *discoverFire
 name:Discover Fire
@@ -196,50 +192,50 @@ name:Craft Axe
 on click:yield 1 axe
 on click:lose 5 sticks
 on click:lose 3 stone
-req:phase>=2
+req:phase=2
 
 *meetNPC
 name:Find Survivor
 on click:yield 1 people
-req:phase>=2 and exploration>5
+req:phase=2 and exploration>5
 
 *assignWorker
 name:Assign Worker
 on click:yield 1 workers
 on click:lose 1 people
-req:people>0
+req:phase>=2 and people>0
 
 *work
 name:Work
 on click:yield 1 energy
-req:workers>0
+req:phase>=2 and workers>0
 
 *forage
 name:Forage
 on click:yield 2 food
-req:workers>0
+req:phase>=2 and workers>0
 
 *gatherMaterials
 name:Gather Materials
 on click:yield 2 materials
-req:workers>0
+req:phase>=2 and workers>0
 
 *craftTools
 name:Craft Tools
 on click:yield 1 tools
 on click:lose 5 materials
-req:materials>5
+req:phase>=2 and materials>5
 
 *study
 name:Study
 on click:yield 1 knowledge
-req:tools>3
+req:phase>=2 and tools>3
 
 *bigDecision
 name:Choose Your Future
 on click:phase is 3
 on click:log You are no longer just surviving...
-req:knowledge>10 and materials>20
+req:phase=2 and knowledge>10 and materials>20
 
 *pathTribe
 name:Build a Tribe
@@ -282,43 +278,43 @@ req:phase=3
 *exploreTribes
 name:Explore for Tribes
 on click:yield 1 tribePower
-req:path=1
+req:phase=4 and path=1
 
 *findTribe
 name:Encounter Tribe
 on click:yield 5 tribePower
 on click:log You find another tribe.
-req:path=1 and tribePower>10
+req:phase=4 and path=1 and tribePower>10
 
 *tribeWar
 name:Tribe War
 on click:yield 2 warUnlock
 on click:log Tribal war begins.
-req:path=1 and tribePower>20
+req:phase=4 and path=1 and tribePower>20
 
 *unlockWW3
 name:Escalate to World War
 on click:path is 4
 on click:log Conflict spreads worldwide.
-req:path=1 and warUnlock>200
+req:phase=4 and path=1 and warUnlock>200
 
 *recruitSoldiers
 name:Recruit Soldiers
 on click:yield 5 soldiers
 on click:lose 2 people
-req:path=4 and people>2
+req:phase=4 and path=4 and people>2
 
 *produceWeapons
 name:Produce Weapons
 on click:yield 5 warMaterials
 on click:lose 5 materials
-req:path=4 and materials>5
+req:phase=4 and path=4 and materials>5
 
 *launchAttack
 name:Launch Attack
 on click:yield 1 warProgress
 on click:log You attack enemy forces.
-req:path=4 and soldiers>10 and warMaterials>10
+req:phase=4 and path=4 and soldiers>10 and warMaterials>10
 
 Buildings
 
