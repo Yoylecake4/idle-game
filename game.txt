@@ -1,11 +1,9 @@
 Let's make a game!
-
 name:Infinite Expedition
 by:You
 desc:Start alone. Discover your purpose.
 
 Settings
-
 background:#0b1a2b
 no particles
 css filters off
@@ -29,77 +27,56 @@ opacity:0.4;
 }
 
 Layout
-
 *main
 contains:res, buttons, store
-
 *res
 contains:Resources
-
 *buttons
 contains:Buttons
-
 *store
 contains:Buildings, Upgrades
 
 Resources
-
 *phase
 name:Phase
 hidden
-
 *intro
 name:Intro
 hidden
-
 *introTick
 name:Intro Timer
 hidden
-
 *path
 name:Path
 hidden
-
 *exploration
 name:Exploration
-
 *sticks
 name:Sticks
-
 *stone
 name:Stone
-
 *knowledge
 name:Knowledge
-
 *people
 name:People
-
 *workers
 name:Workers
 hidden
-
 *materials
 name:Materials
-
 *tools
 name:Tools
-
 *energy
 name:Energy
-
 *soldiers
 name:Soldiers
-
 *warMaterials
 name:War Materials
-
 *warProgress
 name:War Progress
 hidden
 
 Buttons
-
 *start
 name:Begin
 on click:
@@ -113,47 +90,38 @@ if (intro=1 and introTick=1)
 log Darkness...
 yield 1 introTick
 end
-
 if (intro=1 and introTick=2)
 log You wake up.
 yield 1 introTick
 end
-
 if (intro=1 and introTick=3)
 log Alone.
 yield 1 introTick
 end
-
 if (intro=1 and introTick=4)
 log No memory.
 yield 1 introTick
 end
-
 if (intro=1 and introTick=5)
 log Just instinct.
 yield 1 introTick
 end
-
 if (intro=1 and introTick=6)
 log Survive.
 yield 1 introTick
 end
-
 if (intro=1 and introTick=7)
 log Explore.
 yield 1 introTick
 end
-
 if (intro=1 and introTick=8)
 log Adapt.
 yield 1 introTick
 end
-
 if (intro=1 and introTick=9)
 log Become something more.
 yield 1 introTick
 end
-
 if (intro=1 and introTick=10)
 phase is 1
 intro is 2
@@ -284,31 +252,26 @@ if (warProgress>20 and soldiers<50)
 log You lost the war.
 warProgress is 0
 end
-
 if (warProgress>20 and soldiers>100 and warMaterials>100)
 log The world ends in nuclear fire.
 warProgress is 0
 end
-
 if (warProgress>20 and soldiers>=50 and soldiers<=100)
 log The war continues endlessly.
 warProgress is 0
 end
 
 Buildings
-
 *camp
 name:Camp
 cost:10 sticks
 on tick:yield 1 energy
-
 *farm
 name:Farms
 cost:20 materials
 on tick:yield 2 food
 
 Upgrades
-
 *toolsBoost
 name:Better Tools
 cost:10 tools
