@@ -238,7 +238,6 @@ log The war continues endlessly.
 end
 warProgress is 0
 end
-hidden
 
 Buildings
 
