@@ -19,86 +19,22 @@ contains:Buttons
 contains:Buildings, Upgrades
 
 Resources
-*phase
-hidden
-*intro
-hidden
-*introTick
-hidden
+*phase hidden
+*intro hidden
+*introTick hidden
 *exploration
 *sticks
 *stone
 *knowledge
 *people
-*workers
-hidden
+*workers hidden
 *materials
 *tools
 *energy
-*path
-hidden
+*path hidden
 *soldiers
 *warMaterials
-*warProgress
-hidden
-
-*introSystem
-on tick:
-if (intro=1 and introTick=1)
-    log Darkness...
-    yield 1 introTick
-end
-if (intro=1 and introTick=2)
-    log You wake up.
-    yield 1 introTick
-end
-if (intro=1 and introTick=3)
-    log Alone.
-    yield 1 introTick
-end
-if (intro=1 and introTick=4)
-    log No memory.
-    yield 1 introTick
-end
-if (intro=1 and introTick=5)
-    log Just instinct.
-    yield 1 introTick
-end
-if (intro=1 and introTick=6)
-    log Survive.
-    yield 1 introTick
-end
-if (intro=1 and introTick=7)
-    log Explore.
-    yield 1 introTick
-end
-if (intro=1 and introTick=8)
-    log Adapt.
-    yield 1 introTick
-end
-if (intro=1 and introTick=9)
-    log Become something more.
-    yield 1 introTick
-end
-if (intro=1 and introTick=10)
-    phase is 1
-    intro is 2
-end
-
-*warSystem
-on tick:
-if (warProgress>20 and soldiers<50)
-    log You lost the war.
-    warProgress is 0
-end
-if (warProgress>20 and soldiers>100 and warMaterials>100)
-    log The world ends in nuclear fire.
-    warProgress is 0
-end
-if (warProgress>20 and soldiers>=50 and soldiers<=100)
-    log The war continues endlessly.
-    warProgress is 0
-end
+*warProgress hidden
 
 Buttons
 
@@ -108,6 +44,76 @@ on click:
 intro is 1
 introTick is 1
 req:intro=0
+
+*intro1
+name:...
+on click:
+log Darkness...
+introTick is 2
+req:intro=1 and introTick=1
+
+*intro2
+name:...
+on click:
+log You wake up.
+introTick is 3
+req:introTick=2
+
+*intro3
+name:...
+on click:
+log Alone.
+introTick is 4
+req:introTick=3
+
+*intro4
+name:...
+on click:
+log No memory.
+introTick is 5
+req:introTick=4
+
+*intro5
+name:...
+on click:
+log Just instinct.
+introTick is 6
+req:introTick=5
+
+*intro6
+name:...
+on click:
+log Survive.
+introTick is 7
+req:introTick=6
+
+*intro7
+name:...
+on click:
+log Explore.
+introTick is 8
+req:introTick=7
+
+*intro8
+name:...
+on click:
+log Adapt.
+introTick is 9
+req:introTick=8
+
+*intro9
+name:...
+on click:
+log Become something more.
+introTick is 10
+req:introTick=9
+
+*introEnd
+name:Begin Journey
+on click:
+phase is 1
+intro is 2
+req:introTick=10
 
 *explore
 name:Explore
@@ -228,21 +234,11 @@ on click:
 yield 1 warProgress
 req:path=3 and soldiers>10
 
-Buildings
-
-*camp
-name:Camp
-cost:10 sticks
-on tick:yield 1 energy
-
-*farm
-name:Farms
-cost:20 materials
-on tick:yield 2 food
-
-Upgrades
-
-*toolsBoost
-name:Better Tools
-cost:10 tools
-passive:multiply yield of materials by 2
+*warCheck
+name:Check War Outcome
+on click:
+if (warProgress>20 and soldiers<50) log You lost the war.
+if (warProgress>20 and soldiers>100 and warMaterials>100) log The world ends in nuclear fire.
+if (warProgress>20 and soldiers>=50 and soldiers<=100) log The war continues endlessly.
+warProgress is 0
+req:path=3
