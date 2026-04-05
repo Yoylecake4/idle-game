@@ -13,13 +13,13 @@ css filters off
 Layout
 
 *main
-contains:introPanel, gamePanel, store
+contains:res, buttons, store
 
-*introPanel
-contains:IntroButtons
+*res
+contains:Resources
 
-*gamePanel
-contains:Resources, Buttons
+*buttons
+contains:Buttons
 
 *store
 contains:Buildings, Upgrades
@@ -91,7 +91,7 @@ name:War Materials
 name:War Progress
 hidden
 
-IntroButtons
+Buttons
 
 *introWake
 name:Wake Up
@@ -117,8 +117,6 @@ on click:introStep is 4
 on click:phase is 1
 on click:log You begin your journey.
 req:introStep=3
-
-Buttons
 
 *explore
 name:Explore
