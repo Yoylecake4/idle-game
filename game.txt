@@ -8,7 +8,7 @@ Settings
 
 background:#0b1a2b
 no particles
-css filters off
+css filters on
 
 css:
 #buttons {
