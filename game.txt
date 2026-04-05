@@ -44,24 +44,55 @@ contains:Buildings, Upgrades
 
 Resources
 
-*phase name:Phase hidden
-*intro name:Intro hidden
-*path name:Path hidden
+*phase
+name:Phase
+hidden
 
-*exploration name:Exploration
-*sticks name:Sticks
-*stone name:Stone
-*knowledge name:Knowledge
-*people name:People
-*workers name:Workers hidden
+*intro
+name:Intro
+hidden
 
-*materials name:Materials
-*tools name:Tools
-*energy name:Energy
+*path
+name:Path
+hidden
 
-*soldiers name:Soldiers
-*warMaterials name:War Materials
-*warProgress name:War Progress hidden
+*exploration
+name:Exploration
+
+*sticks
+name:Sticks
+
+*stone
+name:Stone
+
+*knowledge
+name:Knowledge
+
+*people
+name:People
+
+*workers
+name:Workers
+hidden
+
+*materials
+name:Materials
+
+*tools
+name:Tools
+
+*energy
+name:Energy
+
+*soldiers
+name:Soldiers
+
+*warMaterials
+name:War Materials
+
+*warProgress
+name:War Progress
+hidden
 
 Buttons
 
