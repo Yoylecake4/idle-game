@@ -7,41 +7,30 @@ desc:Survive, discover, and build a civilization.
 Resources
 *energy
 name:Energy
-
 *food
-	name:Food
-
+name:Food
 *materials
-	name:Materials
-
+name:Materials
 *knowledge
-	name:Knowledge
-
+name:Knowledge
 *exploration
-	name:Exploration
-
+name:Exploration
 *people
-	name:Colonists
-
+name:Colonists
 *tools
-	name:Tools
-
+name:Tools
 *sticks
-	name:Sticks
-
+name:Sticks
 *stone
-	name:Stone
-
+name:Stone
 *axe
-	name:Axe
-	hidden
+name:Axe
+hidden
 
 Buttons
 *lookAround
 name:Look Around
-desc:Observe your surroundings.
 on click:yield 1 exploration
-on click:log You are alone in a strange land...
 
 *gatherSticks
 	name:Pick up Sticks
@@ -65,7 +54,6 @@ on click:log You are alone in a strange land...
 *meetNPC
 	name:Investigate Noise
 	on click:yield 1 people
-	on click:log You meet a survivor. They join you.
 	req:exploration>5
 
 *craftAxe
@@ -73,13 +61,11 @@ on click:log You are alone in a strange land...
 	on click:yield 1 axe
 	on click:lose 5 sticks
 	on click:lose 3 stone
-	on click:log You crafted an axe.
 	req:sticks>5 and stone>3
 
 *unlockVillage
 	name:Settle Village
 	on click:yield 1 people
-	on click:log You begin forming a settlement.
 	req:people>1 and axe>0
 
 *work
