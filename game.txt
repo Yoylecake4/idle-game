@@ -8,24 +8,6 @@ background:#0b1a2b
 no particles
 css filters off
 
-css:
-#things {
-display:flex;
-flex-wrap:wrap;
-gap:6px;
-}
-.thing {
-min-width:140px;
-padding:6px;
-background:#1e2a3a;
-color:white;
-border:1px solid #3a4a5a;
-cursor:pointer;
-}
-.thing.disabled {
-opacity:0.4;
-}
-
 Layout
 *main
 contains:res, buttons, store
@@ -38,54 +20,30 @@ contains:Buildings, Upgrades
 
 Resources
 *phase
-name:Phase
 hidden
 *intro
-name:Intro
 hidden
 *introTick
-name:Intro Timer
-hidden
-*path
-name:Path
 hidden
 *exploration
-name:Exploration
 *sticks
-name:Sticks
 *stone
-name:Stone
 *knowledge
-name:Knowledge
 *people
-name:People
 *workers
-name:Workers
 hidden
 *materials
-name:Materials
 *tools
-name:Tools
 *energy
-name:Energy
+*path
+hidden
 *soldiers
-name:Soldiers
 *warMaterials
-name:War Materials
 *warProgress
-name:War Progress
 hidden
 
-Buttons
-*start
-name:Begin
-on click:
-intro is 1
-introTick is 1
-req:intro=0
-
-*introRunner
-passive:
+*introSystem
+on tick:
 if (intro=1 and introTick=1)
 log Darkness...
 yield 1 introTick
@@ -126,6 +84,30 @@ if (intro=1 and introTick=10)
 phase is 1
 intro is 2
 end
+
+*warSystem
+on tick:
+if (warProgress>20 and soldiers<50)
+log You lost the war.
+warProgress is 0
+end
+if (warProgress>20 and soldiers>100 and warMaterials>100)
+log The world ends in nuclear fire.
+warProgress is 0
+end
+if (warProgress>20 and soldiers>=50 and soldiers<=100)
+log The war continues endlessly.
+warProgress is 0
+end
+
+Buttons
+
+*start
+name:Begin
+on click:
+intro is 1
+introTick is 1
+req:intro=0
 
 *explore
 name:Explore
@@ -246,32 +228,20 @@ on click:
 yield 1 warProgress
 req:path=3 and soldiers>10
 
-*warResult
-passive:
-if (warProgress>20 and soldiers<50)
-log You lost the war.
-warProgress is 0
-end
-if (warProgress>20 and soldiers>100 and warMaterials>100)
-log The world ends in nuclear fire.
-warProgress is 0
-end
-if (warProgress>20 and soldiers>=50 and soldiers<=100)
-log The war continues endlessly.
-warProgress is 0
-end
-
 Buildings
+
 *camp
 name:Camp
 cost:10 sticks
 on tick:yield 1 energy
+
 *farm
 name:Farms
 cost:20 materials
 on tick:yield 2 food
 
 Upgrades
+
 *toolsBoost
 name:Better Tools
 cost:10 tools
