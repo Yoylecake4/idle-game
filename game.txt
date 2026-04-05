@@ -10,6 +10,46 @@ background:#0b1a2b
 no particles
 css filters off
 
+css:
+#buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-width: 900px;
+}
+
+#buttons button {
+    min-width: 140px;
+    padding: 6px;
+    font-size: 13px;
+}
+
+#res {
+    margin-bottom: 10px;
+}
+
+#store {
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    width: 220px;
+}
+
+button {
+    background: #1e2a3a;
+    color: white;
+    border: 1px solid #3a4a5a;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2a3a4f;
+}
+
+button:disabled {
+    opacity: 0.4;
+}
+
 Layout
 
 *main
