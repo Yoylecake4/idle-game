@@ -40,6 +40,10 @@ hidden
 name:Path
 hidden
 
+*introStep
+name:Intro
+hidden
+
 *energy
 name:Energy
 
@@ -95,10 +99,30 @@ hidden
 
 Buttons
 
-*start
+*beginGame
 name:Wake Up
+on click:introStep is 1
+on click:log Darkness fades... you wake up alone.
+req:phase=0
+
+*introLook
+name:Look Around
+on click:introStep is 2
+on click:log Trees. Silence. You are completely alone.
+req:introStep=1
+
+*introThink
+name:Think
+on click:introStep is 3
+on click:log You need food... shelter... purpose.
+req:introStep=2
+
+*introMove
+name:Get Up
+on click:introStep is 4
 on click:phase is 1
-on click:log You wake up alone...
+on click:log You begin your journey.
+req:introStep=3
 
 *explore
 name:Explore
@@ -320,7 +344,7 @@ passive:multiply yield of knowledge by 2
 
 Achievements
 
-*achStart
+*firstStep
 name:First Step
 req:exploration>1
 
@@ -336,7 +360,7 @@ req:people>1
 name:Settlement Begins
 req:people>5
 
-*war
+*warAch
 name:War Begins
 req:soldiers>10
 
