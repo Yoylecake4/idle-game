@@ -1,9 +1,11 @@
 Let's make a game!
+
 name:Infinite Expedition
 by:You
 desc:Start alone. Discover your purpose.
 
 Settings
+
 background:#0b1a2b
 no particles
 css filters off
@@ -11,203 +13,197 @@ css filters off
 Layout
 
 *main
-	contains:res, actions
-	
-	*res
-		contains:Resources
-	
-	*actions
-		contains:Buttons
+contains:res, buttons
+
+*res
+contains:Resources
+
+*buttons
+contains:Buttons
 
 *store
-	contains:buildings, upgrades
-	
-	*buildings
-		contains:Buildings
-	
-	*upgrades
-		contains:Upgrades
+contains:buildings, upgrades
+
+*buildings
+contains:Buildings
+
+*upgrades
+contains:Upgrades
 
 Resources
 
 *energy
-	name:Energy
+name:Energy
 
 *food
-	name:Food
+name:Food
 
 *materials
-	name:Materials
+name:Materials
 
 *knowledge
-	name:Knowledge
+name:Knowledge
 
 *exploration
-	name:Exploration
+name:Exploration
 
 *people
-	name:Colonists
+name:Colonists
 
 *workers
-	name:Workers
-	hidden
+name:Workers
+hidden
 
 *tools
-	name:Tools
+name:Tools
 
 *sticks
-	name:Sticks
+name:Sticks
 
 *stone
-	name:Stone
+name:Stone
 
 *axe
-	name:Axe
-	hidden
+name:Axe
+hidden
 
 Buttons
 
 *explore
-	name:Explore
-	desc:Search your surroundings.
-	on click:yield 1 exploration
-	on click:log You explore the unknown...
+name:Explore
+on click:yield 1 exploration
 
 *gatherSticks
-	name:Gather Sticks
-	on click:yield 1 sticks
-	req:exploration>1
+name:Gather Sticks
+on click:yield 1 sticks
+req:exploration>1
 
 *gatherStone
-	name:Gather Stone
-	on click:yield 1 stone
-	req:exploration>2
+name:Gather Stone
+on click:yield 1 stone
+req:exploration>2
 
 *searchFood
-	name:Search for Food
-	on click:yield 1 food
-	req:exploration>3
+name:Search Food
+on click:yield 1 food
+req:exploration>3
 
 *rest
-	name:Rest
-	on click:yield 2 energy
+name:Rest
+on click:yield 2 energy
 
 *discoverFire
-	name:Discover Fire
-	on click:yield 1 knowledge
-	on click:log You discover fire.
-	req:sticks>10 and stone>5
+name:Discover Fire
+on click:yield 1 knowledge
+req:sticks>10 and stone>5
 
 *meetNPC
-	name:Find Survivor
-	on click:yield 1 people
-	on click:log A survivor joins you.
-	req:exploration>5
+name:Find Survivor
+on click:yield 1 people
+req:exploration>5
 
 *craftAxe
-	name:Craft Axe
-	on click:yield 1 axe
-	on click:lose 5 sticks
-	on click:lose 3 stone
-	on click:log You crafted an axe.
-	req:sticks>5 and stone>3
+name:Craft Axe
+on click:yield 1 axe
+on click:lose 5 sticks
+on click:lose 3 stone
+req:sticks>5 and stone>3
 
 *assignWorker
-	name:Assign Worker
-	on click:yield 1 workers
-	on click:lose 1 people
-	req:people>0
+name:Assign Worker
+on click:yield 1 workers
+on click:lose 1 people
+req:people>0
 
-*unlockVillage
-	name:Settle Land
-	on click:yield 1 people
-	on click:log You begin forming a settlement.
-	req:knowledge>3 and axe>0
+*settle
+name:Settle Land
+on click:yield 1 people
+req:knowledge>3 and axe>0
 
 *work
-	name:Work
-	on click:yield 1 energy
-	req:workers>0
+name:Work
+on click:yield 1 energy
+req:workers>0
 
 *forage
-	name:Forage
-	on click:yield 2 food
-	req:workers>0
+name:Forage
+on click:yield 2 food
+req:workers>0
 
 *gatherMaterials
-	name:Gather Materials
-	on click:yield 2 materials
-	req:workers>0
+name:Gather Materials
+on click:yield 2 materials
+req:workers>0
 
 *craftTools
-	name:Craft Tools
-	on click:yield 1 tools
-	on click:lose 5 materials
-	req:materials>5
+name:Craft Tools
+on click:yield 1 tools
+on click:lose 5 materials
+req:materials>5
 
 *study
-	name:Study
-	on click:yield 1 knowledge
-	req:tools>3
+name:Study
+on click:yield 1 knowledge
+req:tools>3
 
 Buildings
 
 *camp
-	name:Camp
-	cost:10 sticks
-	on tick:yield 1 energy
+name:Camp
+cost:10 sticks
+on tick:yield 1 energy
 
 *farm
-	name:Farms
-	cost:20 materials
-	on tick:yield 2 food
+name:Farms
+cost:20 materials
+on tick:yield 2 food
 
 *workshop
-	name:Workshop
-	cost:30 materials
-	on tick:yield 1 tools
+name:Workshop
+cost:30 materials
+on tick:yield 1 tools
 
 *school
-	name:School
-	cost:50 materials
-	on tick:yield 1 knowledge
+name:School
+cost:50 materials
+on tick:yield 1 knowledge
 
 Upgrades
 
 *axeBoost
-	name:Efficient Cutting
-	cost:1 axe
-	passive:multiply yield of sticks by 2
+name:Efficient Cutting
+cost:1 axe
+passive:multiply yield of sticks by 2
 
 *workerBoost
-	name:Organized Labor
-	cost:5 workers
-	passive:multiply yield of materials by 2
-	passive:multiply yield of food by 2
+name:Organized Labor
+cost:5 workers
+passive:multiply yield of materials by 2
+passive:multiply yield of food by 2
 
 *knowledgeBoost
-	name:Education
-	cost:50 knowledge
-	passive:multiply yield of knowledge by 2
+name:Education
+cost:50 knowledge
+passive:multiply yield of knowledge by 2
 
 Achievements
 
 *start
-	name:First Step
-	req:exploration>1
+name:First Step
+req:exploration>1
 
 *fire
-	name:Fire Starter
-	req:knowledge>1
+name:Fire Starter
+req:knowledge>1
 
 *survivor
-	name:Not Alone
-	req:people>1
+name:Not Alone
+req:people>1
 
 *toolmaker
-	name:Toolmaker
-	req:tools>1
+name:Toolmaker
+req:tools>1
 
 *builder
-	name:Settlement Begins
-	req:people>5
+name:Settlement Begins
+req:people>5
