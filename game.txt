@@ -1,7 +1,7 @@
 Let's make a game!
 	name:Infinite Expedition
 	author:You
-	desc:A massive civilization that takes years to complete.
+	desc:A massive civilization that evolves over time.
 
 Settings
 	background:#0f172a
@@ -31,13 +31,11 @@ Layout
 Buttons
 	*work
 		name:Work
-		desc:Generate energy.
 		on click:yield 1 energy
 		class:bigButton
 
 	*forage
 		name:Forage
-		desc:Get food.
 		on click:yield 1 food
 		req:5 energy
 		class:bigButton
@@ -54,6 +52,24 @@ Buttons
 		req:20 food
 		class:bigButton
 
+	*craftTools
+		name:Craft Tools
+		on click:yield 1 tools
+		req:25 materials
+		class:bigButton
+
+	*study
+		name:Study
+		on click:yield 1 knowledge
+		req:10 tools
+		class:bigButton
+
+	*explore
+		name:Explore
+		on click:yield 1 exploration
+		req:25 knowledge
+		class:bigButton
+
 Resources
 	*energy
 		name:Energy
@@ -67,6 +83,28 @@ Resources
 	*people
 		name:Colonists
 
+	*tools
+		name:Tools
+
+	*knowledge
+		name:Knowledge
+
+	*exploration
+		name:Exploration
+
+	*morale
+		name:Morale
+		is always:(food - people)
+		hidden
+
+	*populationCheck
+		passive:
+			if (food < people)
+				yield -0.1 people
+			end
+		end
+		hidden
+
 Buildings
 	*workers
 		name:Workers
@@ -78,16 +116,120 @@ Buildings
 		cost:20 materials
 		on tick:yield 1 food
 
+	*workshops
+		name:Workshops
+		cost:50 materials
+		on tick:yield 1 tools
+
+	*schools
+		name:Schools
+		cost:75 materials
+		on tick:yield 1 knowledge
+
+	*expeditions
+		name:Expeditions
+		cost:150 knowledge
+		on tick:yield 1 exploration
+
+	*houses
+		name:Houses
+		cost:30 food
+		on tick:yield 0.2 people
+
 Upgrades
-	*efficiency
-		name:Efficiency
+	*betterTools
+		name:Advanced Tools
+		cost:100 tools
+		passive:multiply yield of tools by 2
+
+	*efficientFarms
+		name:Efficient Farming
 		cost:100 food
 		passive:multiply yield of food by 2
 
+	*education
+		name:Education System
+		cost:200 knowledge
+		passive:multiply yield of knowledge by 2
+
+	*expansion
+		name:Expansion Planning
+		cost:100 exploration
+		passive:multiply yield of exploration by 2
+
+	*happyPeople
+		name:Community Care
+		cost:200 food
+		passive:multiply yield of people by 1.5
+
 Achievements
 	*start
-		name:First Steps
+		name:The Beginning
 		req:1 energy
+
+	*food10
+		name:Hunter
+		req:10 food
+
+	*food100
+		name:Provider
+		req:100 food
+
+	*pop10
+		name:Small Group
+		req:10 people
+
+	*pop50
+		name:Village
+		req:50 people
+
+	*pop100
+		name:Town
+		req:100 people
+
+	*tools50
+		name:Crafter
+		req:50 tools
+
+	*knowledge50
+		name:Thinker
+		req:50 knowledge
+
+	*knowledge200
+		name:Scholar
+		req:200 knowledge
+
+	*explore50
+		name:Explorer
+		req:50 exploration
+
+	*explore200
+		name:Pathfinder
+		req:200 exploration
+
+	*explore1000
+		name:World Walker
+		req:1000 exploration
+
+	*builder10
+		name:Builder
+		req:10 workers
+
+	*builder50
+		name:Industrialist
+		req:50 workers
+
+	*farm10
+		name:Farmer
+		req:10 farms
+
+	*farm50
+		name:Agricultural Power
+		req:50 farms
+
+	*longplay
+		name:The Long Run
+		req:10000 energy
 
 CSS
 #game {
