@@ -24,6 +24,7 @@ Layout
 
 	*buttons
 		contains:Buttons
+		class:buttons
 
 	*store
 		contains:Buildings, Upgrades
@@ -108,8 +109,8 @@ Resources
 Buildings
 	*workers
 		name:Workers
-		cost:10 energy
-		on tick:yield 1 energy
+		cost:5 energy
+		on tick:yield 0.5 energy
 
 	*farms
 		name:Farms
@@ -215,17 +216,9 @@ Achievements
 		name:Builder
 		req:10 workers
 
-	*builder50
-		name:Industrialist
-		req:50 workers
-
 	*farm10
 		name:Farmer
 		req:10 farms
-
-	*farm50
-		name:Agricultural Power
-		req:50 farms
 
 	*longplay
 		name:The Long Run
@@ -250,12 +243,17 @@ CSS
 	padding:20px;
 }
 
+.buttons button {
+	display:block;
+	width:100%;
+	margin-bottom:10px;
+}
+
 button {
 	background:#1f2937;
 	color:white;
 	border:none;
 	padding:12px;
-	margin:6px;
 	border-radius:10px;
 	cursor:pointer;
 	font-size:14px;
