@@ -1,18 +1,17 @@
 Let's make a game!
 	name:Infinite Expedition
 	author:You
-	desc:A massive civilization that evolves over time.
+	desc:A long journey from nothing to a civilization.
 
 Settings
 	background:#0f172a
-	building cost increase:115%
 
 Layout
 	*main
 		contains:leftPanel, rightPanel
 
 	*leftPanel
-		contains:res, buttons
+		contains:res, buttons, log
 		class:left
 
 	*rightPanel
@@ -29,200 +28,120 @@ Layout
 	*store
 		contains:Buildings, Upgrades
 
+	*log
+		contains:Log
+
 Buttons
+
+	// === STORY PHASE ===
+	*startJourney
+		name:Wake Up
+		on click:
+			log You wake up alone in a strange land.
+			yield 1 stage
+		end
+
+	*lookAround
+		name:Look Around
+		req:1 stage
+		on click:
+			log You see trees, rocks, and open land.
+			yield 1 stage
+		end
+
+	*gatherSticks
+		name:Gather Sticks
+		req:2 stage
+		on click:
+			yield 1 sticks
+			log You gather some sticks.
+		end
+
+	*makeCamp
+		name:Build Camp
+		req:5 sticks
+		on click:
+			log You build a small camp. Your journey begins.
+			yield 1 unlockGame
+		end
+
+	// === MAIN GAME (LOCKED UNTIL CAMP) ===
 	*work
 		name:Work
+		req:1 unlockGame
 		on click:yield 1 energy
-		class:bigButton
 
 	*forage
 		name:Forage
+		req:1 unlockGame
 		on click:yield 1 food
-		req:5 energy
-		class:bigButton
 
 	*gather
 		name:Gather Materials
+		req:1 unlockGame
 		on click:yield 1 materials
-		req:10 energy
-		class:bigButton
-
-	*recruit
-		name:Recruit Colonist
-		on click:yield 1 people
-		req:20 food
-		class:bigButton
 
 	*craftTools
-		name:Craft Tools
-		on click:yield 1 tools
-		req:25 materials
-		class:bigButton
-
-	*study
-		name:Study
-		on click:yield 1 knowledge
-		req:10 tools
-		class:bigButton
-
-	*explore
-		name:Explore
-		on click:yield 1 exploration
-		req:25 knowledge
-		class:bigButton
+		name:Craft Tool
+		req:2 materials
+		on click:
+			yield -2 materials
+			yield 1 tools
+		end
 
 Resources
-	*energy
-		name:Energy
+	*stage
+		hidden
 
-	*food
-		name:Food
+	*unlockGame
+		hidden
 
-	*materials
-		name:Materials
-
-	*people
-		name:Colonists
+	// INVENTORY
+	*sticks
+		name:Sticks
+		hidden when 0
 
 	*tools
 		name:Tools
+		hidden when 0
 
-	*knowledge
-		name:Knowledge
+	// MAIN RESOURCES
+	*energy
+		name:Energy
+		hidden when 0
 
-	*exploration
-		name:Exploration
+	*food
+		name:Food
+		hidden when 0
 
-	*morale
-		name:Morale
-		is always:(food - people)
-		hidden
-
-	*populationCheck
-		passive:
-			if (food < people)
-				yield -0.1 people
-			end
-		end
-		hidden
+	*materials
+		name:Materials
+		hidden when 0
 
 Buildings
 	*workers
 		name:Workers
-		cost:5 energy
-		on tick:yield 0.5 energy
+		req:1 unlockGame
+		cost:10 energy
+		on tick:yield 1 energy
 
 	*farms
 		name:Farms
+		req:1 unlockGame
 		cost:20 materials
 		on tick:yield 1 food
 
-	*workshops
-		name:Workshops
-		cost:50 materials
-		on tick:yield 1 tools
-
-	*schools
-		name:Schools
-		cost:75 materials
-		on tick:yield 1 knowledge
-
-	*expeditions
-		name:Expeditions
-		cost:150 knowledge
-		on tick:yield 1 exploration
-
-	*houses
-		name:Houses
-		cost:30 food
-		on tick:yield 0.2 people
-
 Upgrades
-	*betterTools
-		name:Advanced Tools
-		cost:100 tools
-		passive:multiply yield of tools by 2
-
-	*efficientFarms
-		name:Efficient Farming
-		cost:100 food
-		passive:multiply yield of food by 2
-
-	*education
-		name:Education System
-		cost:200 knowledge
-		passive:multiply yield of knowledge by 2
-
-	*expansion
-		name:Expansion Planning
-		cost:100 exploration
-		passive:multiply yield of exploration by 2
-
-	*happyPeople
-		name:Community Care
-		cost:200 food
-		passive:multiply yield of people by 1.5
+	*efficiency
+		name:Efficiency
+		req:1 unlockGame
+		cost:50 tools
+		passive:multiply yield of energy by 2
 
 Achievements
-	*start
-		name:The Beginning
-		req:1 energy
-
-	*food10
-		name:Hunter
-		req:10 food
-
-	*food100
-		name:Provider
-		req:100 food
-
-	*pop10
-		name:Small Group
-		req:10 people
-
-	*pop50
-		name:Village
-		req:50 people
-
-	*pop100
-		name:Town
-		req:100 people
-
-	*tools50
-		name:Crafter
-		req:50 tools
-
-	*knowledge50
-		name:Thinker
-		req:50 knowledge
-
-	*knowledge200
-		name:Scholar
-		req:200 knowledge
-
-	*explore50
-		name:Explorer
-		req:50 exploration
-
-	*explore200
-		name:Pathfinder
-		req:200 exploration
-
-	*explore1000
-		name:World Walker
-		req:1000 exploration
-
-	*builder10
-		name:Builder
-		req:10 workers
-
-	*farm10
-		name:Farmer
-		req:10 farms
-
-	*longplay
-		name:The Long Run
-		req:10000 energy
+	*begin
+		name:A New Beginning
+		req:1 unlockGame
 
 CSS
 #game {
@@ -256,16 +175,8 @@ button {
 	padding:12px;
 	border-radius:10px;
 	cursor:pointer;
-	font-size:14px;
 }
 
 button:hover {
 	background:#374151;
-}
-
-.store .building {
-	background:#111827;
-	padding:12px;
-	margin:6px;
-	border-radius:10px;
 }
