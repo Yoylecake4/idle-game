@@ -7,7 +7,7 @@ desc:Start alone. Discover your purpose.
 
 Resources
 
-```
+
 *energy
 	name:Energy
 
@@ -34,11 +34,11 @@ Resources
 
 *stone
 	name:Stone
-```
+
 
 Buttons
 
-```
+
 *exploreStart
 	name:Explore
 	desc:Look around.
@@ -104,11 +104,11 @@ Buttons
 	name:Explore World
 	on click:yield 1 exploration
 	req:knowledge>10
-```
+
 
 Buildings
 
-```
+
 *camp
 	name:Camp
 	cost:10 sticks
@@ -128,11 +128,11 @@ Buildings
 	name:School
 	cost:50 materials
 	on tick:yield 1 knowledge
-```
+
 
 Upgrades
 
-```
+
 *fireMaking
 	name:Fire Mastery
 	cost:10 sticks
@@ -147,11 +147,11 @@ Upgrades
 	name:Education
 	cost:50 knowledge
 	passive:multiply yield of knowledge by 2
-```
+
 
 Achievements
 
-```
+
 *start
 	name:First Step
 	req:exploration>1
@@ -167,4 +167,4 @@ Achievements
 *knowledge10
 	name:Thinker
 	req:knowledge>10
-```
+
