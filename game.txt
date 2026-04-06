@@ -19,271 +19,279 @@ contains:res,buttons,store
 contains:phase,intro,introTick,path,exploration,sticks,stone,food,knowledge,people,workers,materials,tools,energy,soldiers,warMaterials,warProgress
 
 *buttons
-contains:start,intro1,intro2,intro3,intro4,intro5,intro6,intro7,intro8,intro9,introEnd,explore,gatherSticks,gatherStone,discoverFire,findPerson,assignWorker,work,craftTools,study,decide,tribe,solo,war,growTribe,tribeWar,recruit,weapons,attack,warLose,warEnd,warLoop
+contains:start,startTick,intro1,intro2,intro3,intro4,intro5,intro6,intro7,intro8,intro9,introEndPhase,introEndFlag,explore,gatherSticks,gatherStone,discoverFireK,discoverFireP,findPerson,assignWorkerW,assignWorkerP,work,craftToolsT,craftToolsM,study,decide,tribeP,tribePhase,tribePeople,soloPath,soloPhase,warPath,warPhase,warSoldiers,warMats,growTribe,tribeWar,recruitS,recruitP,weaponsM,weaponsLose,attack,warLoseLog,warLoseReset,warEndLog,warEndReset,warLoopLog,warLoopReset
 
 *store
 contains:camp,farm,toolsBoost
 
 Resources
 
-*phase
-hidden
-
-*intro
-hidden
-
-*introTick
-hidden
-
-*path
-hidden
+*phase hidden
+*intro hidden
+*introTick hidden
+*path hidden
 
 *exploration
-
 *sticks
-
 *stone
 
 *food
 name:Food
 
 *knowledge
-
 *people
 
-*workers
-hidden
+*workers hidden
 
 *materials
-
 *tools
-
 *energy
 
 *soldiers
-
 *warMaterials
 
-*warProgress
-hidden
+*warProgress hidden
 
 Buttons
 
 *start
 name:Begin
-on click:
-intro is 1
-introTick is 1
+on click:intro is 1
+req:intro=0
+
+*startTick
+name:Begin
+on click:introTick is 1
 req:intro=0
 
 *intro1
 name:...
-on click:
-log Darkness...
-introTick is 2
+on click:log Darkness...
 req:introTick=1
 
 *intro2
 name:...
-on click:
-log You wake up.
-introTick is 3
-req:introTick=2
+on click:introTick is 2
+req:introTick=1
 
 *intro3
 name:...
-on click:
-log Alone.
-introTick is 4
-req:introTick=3
+on click:log You wake up.
+req:introTick=2
 
 *intro4
 name:...
-on click:
-log No memory.
-introTick is 5
-req:introTick=4
+on click:introTick is 3
+req:introTick=2
 
 *intro5
 name:...
-on click:
-log Just instinct.
-introTick is 6
-req:introTick=5
+on click:log Alone.
+req:introTick=3
 
 *intro6
 name:...
-on click:
-log Survive.
-introTick is 7
-req:introTick=6
+on click:introTick is 4
+req:introTick=3
 
 *intro7
 name:...
-on click:
-log Explore.
-introTick is 8
-req:introTick=7
+on click:log No memory.
+req:introTick=4
 
 *intro8
 name:...
-on click:
-log Adapt.
-introTick is 9
-req:introTick=8
+on click:introTick is 5
+req:introTick=4
 
 *intro9
 name:...
-on click:
-log Become something more.
-introTick is 10
-req:introTick=9
+on click:log Survive.
+req:introTick=5
 
-*introEnd
-name:Begin Journey
-on click:
-phase is 1
-intro is 2
-req:introTick=10
+*introEndPhase
+name:Continue
+on click:phase is 1
+req:introTick=5
+
+*introEndFlag
+name:Continue
+on click:intro is 2
+req:introTick=5
 
 *explore
 name:Explore
-on click:
-yield 1 exploration
+on click:yield 1 exploration
 req:phase=1
 
 *gatherSticks
 name:Gather Sticks
-on click:
-yield 1 sticks
+on click:yield 1 sticks
 req:exploration>5
 
 *gatherStone
 name:Gather Stone
-on click:
-yield 1 stone
+on click:yield 1 stone
 req:exploration>10
 
-*discoverFire
+*discoverFireK
 name:Discover Fire
-on click:
-yield 1 knowledge
-phase is 2
+on click:yield 1 knowledge
+req:sticks>10 and stone>5
+
+*discoverFireP
+name:Discover Fire
+on click:phase is 2
 req:sticks>10 and stone>5
 
 *findPerson
 name:Find Survivor
-on click:
-yield 1 people
+on click:yield 1 people
 req:phase=2 and exploration>15
 
-*assignWorker
+*assignWorkerW
 name:Assign Worker
-on click:
-yield 1 workers
-lose 1 people
+on click:yield 1 workers
+req:people>0
+
+*assignWorkerP
+name:Assign Worker
+on click:lose 1 people
 req:people>0
 
 *work
 name:Work
-on click:
-yield 1 materials
+on click:yield 1 materials
 req:workers>0
 
-*craftTools
+*craftToolsT
 name:Craft Tools
-on click:
-yield 1 tools
-lose 5 materials
+on click:yield 1 tools
+req:materials>5
+
+*craftToolsM
+name:Craft Tools
+on click:lose 5 materials
 req:materials>5
 
 *study
 name:Study
-on click:
-yield 1 knowledge
+on click:yield 1 knowledge
 req:tools>3
 
 *decide
-name:Choose Your Path
-on click:
-phase is 3
+name:Choose Path
+on click:phase is 3
 req:knowledge>10
 
-*tribe
+*tribeP
 name:Build Tribe
-on click:
-path is 1
-phase is 4
-yield 5 people
+on click:path is 1
 req:phase=3
 
-*solo
+*tribePhase
+name:Build Tribe
+on click:phase is 4
+req:phase=3
+
+*tribePeople
+name:Build Tribe
+on click:yield 5 people
+req:phase=3
+
+*soloPath
 name:Stay Alone
-on click:
-path is 2
-phase is 4
+on click:path is 2
 req:phase=3
 
-*war
+*soloPhase
+name:Stay Alone
+on click:phase is 4
+req:phase=3
+
+*warPath
 name:Start WW3
-on click:
-path is 3
-phase is 4
-yield 10 soldiers
-yield 20 warMaterials
+on click:path is 3
+req:phase=3
+
+*warPhase
+name:Start WW3
+on click:phase is 4
+req:phase=3
+
+*warSoldiers
+name:Start WW3
+on click:yield 10 soldiers
+req:phase=3
+
+*warMats
+name:Start WW3
+on click:yield 20 warMaterials
 req:phase=3
 
 *growTribe
 name:Grow Tribe
-on click:
-yield 2 people
+on click:yield 2 people
 req:path=1
 
 *tribeWar
 name:Fight Tribe
-on click:
-yield 1 knowledge
+on click:yield 1 knowledge
 req:path=1 and people>10
 
-*recruit
+*recruitS
 name:Recruit Soldiers
-on click:
-yield 5 soldiers
-lose 2 people
+on click:yield 5 soldiers
 req:path=3
 
-*weapons
+*recruitP
+name:Recruit Soldiers
+on click:lose 2 people
+req:path=3
+
+*weaponsM
 name:Make Weapons
-on click:
-yield 5 warMaterials
-lose 5 materials
+on click:yield 5 warMaterials
+req:path=3
+
+*weaponsLose
+name:Make Weapons
+on click:lose 5 materials
 req:path=3
 
 *attack
-name:Launch Attack
-on click:
-yield 1 warProgress
+name:Attack
+on click:yield 1 warProgress
 req:path=3 and soldiers>10
 
-*warLose
+*warLoseLog
 name:Outcome
-on click:
-log You lost the war.
-warProgress is 0
+on click:log You lost the war.
 req:warProgress>20 and soldiers<50
 
-*warEnd
+*warLoseReset
 name:Outcome
-on click:
-log The world ends in nuclear fire.
-warProgress is 0
+on click:warProgress is 0
+req:warProgress>20 and soldiers<50
+
+*warEndLog
+name:Outcome
+on click:log Nuclear fire ends everything.
 req:warProgress>20 and soldiers>100 and warMaterials>100
 
-*warLoop
+*warEndReset
 name:Outcome
-on click:
-log The war continues endlessly.
-warProgress is 0
+on click:warProgress is 0
+req:warProgress>20 and soldiers>100 and warMaterials>100
+
+*warLoopLog
+name:Outcome
+on click:log Endless war continues.
+req:warProgress>20 and soldiers>=50 and soldiers<=100
+
+*warLoopReset
+name:Outcome
+on click:warProgress is 0
 req:warProgress>20 and soldiers>=50 and soldiers<=100
 
 Buildings
@@ -291,19 +299,16 @@ Buildings
 *camp
 name:Camp
 cost:10 sticks
-on tick:
-yield 1 energy
+on tick:yield 1 energy
 
 *farm
 name:Farms
 cost:20 materials
-on tick:
-yield 2 food
+on tick:yield 2 food
 
 Upgrades
 
 *toolsBoost
 name:Better Tools
 cost:10 tools
-passive:
-multiply yield of materials by 2
+passive:multiply yield of materials by 2
