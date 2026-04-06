@@ -1,14 +1,14 @@
 Let's make a game!
 
-name:test
+name:Basic Clicker
 
 Resources
 
-*phase
-hidden
+*points
+name:Points
 
 Buttons
 
-*start
-name:Start
-on click:yield 1 phase
+*click
+name:Click
+on click:yield 1 points
