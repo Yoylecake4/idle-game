@@ -2,6 +2,11 @@ Let's make a game!
 
 name:test
 
+Resources
+
+*phase
+hidden
+
 Layout
 
 *main
@@ -9,8 +14,3 @@ contains:res
 
 *res
 contains:phase
-
-Resources
-
-*phase
-hidden
