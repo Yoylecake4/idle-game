@@ -262,14 +262,26 @@ on click:
 yield 1 warProgress
 req:path=3 and soldiers>10
 
-*warCheck
-name:Check War Outcome
+*warLose
+name:War Outcome
 on click:
-if (warProgress>20 and soldiers<50) log You lost the war.
-if (warProgress>20 and soldiers>100 and warMaterials>100) log The world ends in nuclear fire.
-if (warProgress>20 and soldiers>=50 and soldiers<=100) log The war continues endlessly.
+log You lost the war.
 warProgress is 0
-req:path=3
+req:path=3 and warProgress>20 and soldiers<50
+
+*warEnd
+name:War Outcome
+on click:
+log The world ends in nuclear fire.
+warProgress is 0
+req:path=3 and warProgress>20 and soldiers>100 and warMaterials>100
+
+*warLoop
+name:War Outcome
+on click:
+log The war continues endlessly.
+warProgress is 0
+req:path=3 and warProgress>20 and soldiers>=50 and soldiers<=100
 
 Buildings
 
