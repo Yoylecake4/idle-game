@@ -44,6 +44,9 @@ hidden
 
 *stone
 
+*food
+name:Food
+
 *knowledge
 
 *people
