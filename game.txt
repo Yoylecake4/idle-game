@@ -10,7 +10,4 @@ hidden
 Layout
 
 *main
-contains:res
-
-*res
 contains:phase
