@@ -18,8 +18,14 @@ contains:Resources
 *buttons
 contains:Buttons
 
+*buildings
+contains:Buildings
+
+*upgrades
+contains:Upgrades
+
 *store
-contains:Buildings Upgrades
+contains:buildings upgrades
 
 *main
 contains:res buttons store
@@ -323,36 +329,6 @@ req:path=3
 name:Launch Attack
 on click:yield 1 warProgress
 req:path=3 and soldiers>10
-
-*warLose
-name:War Outcome
-on click:log You lost the war.
-req:path=3 and warProgress>20 and soldiers<50
-
-*warLose2
-name:War Outcome
-on click:warProgress is 0
-req:path=3 and warProgress>20 and soldiers<50
-
-*warEnd
-name:War Outcome
-on click:log The world ends in nuclear fire.
-req:path=3 and warProgress>20 and soldiers>100 and warMaterials>100
-
-*warEnd2
-name:War Outcome
-on click:warProgress is 0
-req:path=3 and warProgress>20 and soldiers>100 and warMaterials>100
-
-*warLoop
-name:War Outcome
-on click:log The war continues endlessly.
-req:path=3 and warProgress>20 and soldiers>=50 and soldiers<=100
-
-*warLoop2
-name:War Outcome
-on click:warProgress is 0
-req:path=3 and warProgress>20 and soldiers>=50 and soldiers<=100
 
 Buildings
 
