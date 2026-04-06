@@ -1,40 +1,68 @@
 Let's make a game!
+
 name:Infinite Expedition
 by:You
 desc:Start alone. Discover your purpose.
 
 Settings
+
 background:#0b1a2b
 no particles
 css filters off
 
 Layout
+
 *main
-contains:res, buttons, store
+contains:res,buttons,store
+
 *res
 contains:Resources
+
 *buttons
 contains:Buttons
+
 *store
-contains:Buildings, Upgrades
+contains:Buildings,Upgrades
 
 Resources
-*phase hidden
-*intro hidden
-*introTick hidden
+
+*phase
+hidden
+
+*intro
+hidden
+
+*introTick
+hidden
+
+*path
+hidden
+
 *exploration
+
 *sticks
+
 *stone
+
 *knowledge
+
 *people
-*workers hidden
+
+*workers
+hidden
+
 *materials
+
 *tools
+
 *energy
-*path hidden
+
 *soldiers
+
 *warMaterials
-*warProgress hidden
+
+*warProgress
+hidden
 
 Buttons
 
@@ -242,3 +270,22 @@ if (warProgress>20 and soldiers>100 and warMaterials>100) log The world ends in 
 if (warProgress>20 and soldiers>=50 and soldiers<=100) log The war continues endlessly.
 warProgress is 0
 req:path=3
+
+Buildings
+
+*camp
+name:Camp
+cost:10 sticks
+on tick:yield 1 energy
+
+*farm
+name:Farms
+cost:20 materials
+on tick:yield 2 food
+
+Upgrades
+
+*toolsBoost
+name:Better Tools
+cost:10 tools
+passive:multiply yield of materials by 2
