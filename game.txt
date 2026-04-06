@@ -26,29 +26,46 @@ contains:res buttons store
 
 Resources
 
-*phase hidden
-*intro hidden
-*introTick hidden
-*path hidden
+*phase
+hidden
+
+*intro
+hidden
+
+*introTick
+hidden
+
+*path
+hidden
 
 *exploration
+
 *sticks
+
 *stone
 
-*food name:Food
+*food
+name:Food
 
 *knowledge
+
 *people
 
-*workers hidden
+*workers
+hidden
 
 *materials
+
 *tools
+
 *energy
 
 *soldiers
+
 *warMaterials
-*warProgress hidden
+
+*warProgress
+hidden
 
 Buttons
 
