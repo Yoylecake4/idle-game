@@ -1,14 +1,1 @@
-Let's make a game!
-
-name:Basic Clicker
-
-Resources
-
-*points
-name:Points
-
-Buttons
-
-*click
-name:Click
-on click:yield 1 points
+test
