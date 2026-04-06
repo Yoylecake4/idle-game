@@ -1,2 +1,65 @@
-testq
-TEST
+Let's make a game!
+
+name:Infinite Expedition (Clean)
+
+Resources
+
+*exploration
+name:Exploration
+
+*sticks
+name:Sticks
+
+*stone
+name:Stone
+
+*knowledge
+name:Knowledge
+
+*people
+name:People
+
+*materials
+name:Materials
+
+*tools
+name:Tools
+
+Buttons
+
+*explore
+name:Explore
+on click:yield 1 exploration
+
+*gatherSticks
+name:Gather Sticks
+on click:yield 1 sticks
+req:exploration>5
+
+*gatherStone
+name:Gather Stone
+on click:yield 1 stone
+req:exploration>10
+
+*discoverFire
+name:Discover Fire
+on click:
+yield 1 knowledge
+req:sticks>10 and stone>5
+
+*findPerson
+name:Find Survivor
+on click:yield 1 people
+req:knowledge>2
+
+*work
+name:Work
+on click:yield 1 materials
+req:people>0
+
+*craftTools
+name:Craft Tools
+on click:
+yield 1 tools
+lose 5 materials
+req:materials>5
