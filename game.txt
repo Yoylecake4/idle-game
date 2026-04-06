@@ -13,7 +13,7 @@ css filters off
 Layout
 
 *main
-contains:res,buttons,store
+contains:res buttons store
 
 *res
 contains:Resources
@@ -22,7 +22,7 @@ contains:Resources
 contains:Buttons
 
 *store
-contains:Buildings,Upgrades
+contains:Buildings Upgrades
 
 Resources
 
